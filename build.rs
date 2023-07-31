@@ -627,22 +627,15 @@ fn maybe_search_include(include_paths: &[PathBuf], header: &str) -> Option<Strin
     }
 }
 
-fn add_to_search_macos(pkg: &str) {
-    let output = Command::new("brew")
-        .arg("--prefix")
-        .arg(pkg)
-        .output()
-        .expect("Failed to execute brew command");
-
-    let prefix = String::from_utf8(output.stdout).unwrap().trim().to_string();
-
-    println!("cargo:rustc-link-search=native={}/lib", prefix);
+fn add_search_dirs_macos() {
+    println!("cargo:rustc-link-search=native=/opt/homebrew/lib");
 }
 
-fn add_to_search(pkg: &str) {
+fn add_search_dirs() {
+    println!("cargo:rustc-link-search=native=/usr/local/lib");
     #[cfg(target_os = "macos")]
     {
-        add_to_search_macos(pkg);
+        add_search_dirs_macos();
     }
 
 }
@@ -655,9 +648,8 @@ fn link_to_libraries(statik: bool) {
             println!("cargo:rustc-link-lib={}={}", ffmpeg_ty, lib.name);
         }
     }
-    println!("cargo:rustc-link-search=native=/usr/local/lib");
 
-    add_to_search("lame");
+    add_search_dirs();
 
     for lib in ["mp3lame", "opus", "ogg", "vorbis"] {
         println!("cargo:rustc-link-lib={}={}", ffmpeg_ty, lib);
