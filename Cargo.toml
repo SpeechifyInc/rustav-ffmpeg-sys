@@ -16,6 +16,8 @@ keywords    = ["audio", "video"]
 doctest = false
 
 [dependencies]
+mp3lame-sys = { version = "0.1.4" , optional = true}
+
 libc = "0.2"
 
 [build-dependencies]
@@ -31,7 +33,7 @@ vcpkg = "0.2"
 default  = ["avcodec", "avdevice", "avfilter", "avformat", "swresample", "swscale"]
 
 static = []
-build  = ["static"]
+build  = ["static", "mp3lame-sys"]
 
 # mark enums in generated bindings as #[non_exhaustive]
 non-exhaustive-enums = []
