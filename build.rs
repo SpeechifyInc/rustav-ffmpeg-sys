@@ -651,7 +651,7 @@ fn link_to_libraries(statik: bool) {
 
     add_search_dirs();
 
-    for lib in ["mp3lame", "opus", "ogg", "vorbis"] {
+    for lib in ["mp3lame", "fdk-aac", "opus", "ogg", "vorbis"] {
         println!("cargo:rustc-link-lib={}={}", ffmpeg_ty, lib);
     }
     if env::var("CARGO_FEATURE_BUILD_ZLIB").is_ok() && cfg!(target_os = "linux") {
