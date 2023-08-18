@@ -16,6 +16,7 @@ keywords    = ["audio", "video"]
 doctest = false
 
 [dependencies]
+lame-sys = { version = "0.1.2", optional = true }
 libc = "0.2"
 
 [build-dependencies]
@@ -71,7 +72,7 @@ build-lib-fdk-aac          = ["build"]
 build-lib-gsm              = ["build"]
 build-lib-ilbc             = ["build"]
 build-lib-kvazaar          = ["build"]
-build-lib-mp3lame          = ["build"]
+build-lib-mp3lame          = ["build", "lame-sys"]
 build-lib-opencore-amrnb   = ["build"]
 build-lib-opencore-amrwb   = ["build"]
 build-lib-openh264         = ["build"]
