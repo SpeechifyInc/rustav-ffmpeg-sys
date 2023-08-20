@@ -16,7 +16,7 @@ keywords    = ["audio", "video"]
 doctest = false
 
 [dependencies]
-lame-sys = { version = "0.1.2", optional = true }
+lame-sys = {git = "https://github.com/andrewgazelka/lame-sys", optional = true}
 libc = "0.2"
 
 [build-dependencies]

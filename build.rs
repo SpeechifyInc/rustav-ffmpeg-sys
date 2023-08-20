@@ -219,6 +219,14 @@ fn build() -> io::Result<()> {
         ));
     }
 
+    if let Ok(path) = env::var("DEP_MP3LAME_INCLUDE") {
+        // add -I to CFLAGS
+
+        // todo: is there a better way to do this
+        let flag = format!(r#"--extra-cflags="-I{path}""#);
+        configure.arg(flag);
+    }
+
     // control debug build
     if env::var("DEBUG").is_ok() {
         configure.arg("--enable-debug");
@@ -637,7 +645,6 @@ fn add_search_dirs() {
     {
         add_search_dirs_macos();
     }
-
 }
 
 fn link_to_libraries(statik: bool) {
