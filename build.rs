@@ -219,12 +219,14 @@ fn build() -> io::Result<()> {
         ));
     }
 
-    if let Ok(path) = env::var("DEP_MP3LAME_INCLUDE") {
-        // add -I to CFLAGS
 
-        // todo: is there a better way to do this
-        let flag = format!(r#"--extra-cflags="-I{path}""#);
-        configure.arg(flag);
+    for (k,v) in env::vars() {
+        if k.ends_with("_INCLUDE") {
+            let path = v;
+            println!("include path: {}", path);
+            let flag = format!(r#"--extra-cflags="-I{path}""#);
+            configure.arg(flag);
+        }
     }
 
     // control debug build
